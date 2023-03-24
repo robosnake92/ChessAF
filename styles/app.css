@@ -1,0 +1,28 @@
+#chess-board {
+  width: 800px;
+  height: 800px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.square {
+  width: 100%;
+  height: 100%;
+
+}
+
+.file {
+  width: 100%;
+  height: 12.5%;
+  display: flex;
+}
+
+.file:nth-child(even) .square:nth-child(odd),
+.file:nth-child(odd) .square:nth-child(even) {
+  background-color: green;
+}
+
+.file:nth-child(even) .square:nth-child(even),
+.file:nth-child(odd) .square:nth-child(odd) {
+  background-color: lightgreen;
+}
