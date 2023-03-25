@@ -1,10 +1,22 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import whitePawn from '../public/pieces/white-pawn.png'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
-  const [pieceLocation, setPieceLocation] = useState({rank: "A", file: "1"});
+  const [grabbedPiece, setGrabbedPiece] = useState(null);
+  const [pieceLocation, setPieceLocation] = useState({
+    whitePawn1: { rank: "A", file: "2", component: <Pawn pieceName = 'whitePawn1' setGrabbedPiece={setGrabbedPiece}/>},
+    whitePawn2: { rank: "B", file: "2", component: <Pawn pieceName = 'whitePawn2' setGrabbedPiece={setGrabbedPiece}/> }
+  });
+
+  useEffect(() => {
+    console.log('pieceLocation updated: ', pieceLocation);
+  }, [pieceLocation])
+
+  useEffect(() => {
+    console.log('grabbedPiece updated: ', grabbedPiece);
+  }, [grabbedPiece])
 
   const handleDragOver = (event) => {
     event.preventDefault()
@@ -14,10 +26,10 @@ export default function Home() {
     event.preventDefault();
     const id = event.target.id;
 
-    if(!!id){
+    if (!!id) {
       const rank = id.split("")[0];
       const file = id.split("")[1];
-      setPieceLocation({rank: rank, file: file});
+      setPieceLocation(pieceLocation => ({...pieceLocation, [grabbedPiece]: {...pieceLocation[grabbedPiece], rank: rank, file: file }}));
     }
   }
 
@@ -25,14 +37,26 @@ export default function Home() {
   const Files = possibleFiles.map(fileNumber => {
     const possibleRanks = ["A", "B", "C", "D", "E", "F", "G", "H"];
     const squares = possibleRanks.map(rank => {
-      return <div 
-        className='square' 
-        onDragOver={handleDragOver} 
-        onDrop={handleDrop} 
-        id={`${rank}${fileNumber}`}>{`${pieceLocation.rank}${pieceLocation.file}` === `${rank}${fileNumber}` && <Pawn />}</div>;
+      // Check each possible piece
+      // TODO: once we find the piece, we don't have to filter anymore. Maybe check if there's a function that stops once the object is found?
+      const piece = Object.keys(pieceLocation).filter(pieceKey => {
+        const pieceState = pieceLocation[pieceKey];
+        return `${pieceState.rank}${pieceState.file}` === `${rank}${fileNumber}`;
+      });
+
+      let pieceComponent = null
+      if(typeof piece !== undefined && piece.length !== 0) {
+        pieceComponent = pieceLocation[piece].component;
+      }
+      
+      return <div
+        className='square'
+        onDragOver={handleDragOver}
+        onDrop={handleDrop}
+        id={`${rank}${fileNumber}`}>{pieceComponent}</div>;
     })
 
-    return <File file={fileNumber} pieceLocation={pieceLocation} setPieceLocation={setPieceLocation}>{squares}</File>;
+    return <File file={fileNumber} pieceLocation={pieceLocation}>{squares}</File>;
   })
 
   return (
@@ -54,23 +78,26 @@ function File(props) {
   )
 }
 
-function Pawn() {
-  
+function Pawn(props) {
+  const pieceName = props.pieceName;
+  const setGrabbedPiece = props.setGrabbedPiece;
+
   const handleDragEnd = (event) => {
   }
 
   const handleDragStart = (event) => {
     event.dataTransfer.effectAllowed = "move";
+    setGrabbedPiece(pieceName);
   }
 
   return (
-    <Image 
+    <Image
       className={`piece grab`}
-      src={whitePawn} 
+      src={whitePawn}
       draggable
-      onDragEnd = {handleDragEnd}
-      onDragStart = {handleDragStart}
-      alt = "white pawn"
+      onDragEnd={handleDragEnd}
+      onDragStart={handleDragStart}
+      alt="white pawn"
     />
   )
 }
