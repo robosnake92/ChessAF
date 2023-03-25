@@ -1,13 +1,19 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import whitePawn from '../public/pieces/white-pawn.png'
+import Head from 'next/head';
+import Image from 'next/image';
+import whitePawn from '../public/pieces/white-pawn.png';
 import { useEffect, useState } from 'react';
 
 export default function Home() {
   const [grabbedPiece, setGrabbedPiece] = useState(null);
   const [pieceLocation, setPieceLocation] = useState({
-    whitePawn1: { rank: "A", file: "2", component: <Pawn pieceName = 'whitePawn1' setGrabbedPiece={setGrabbedPiece}/>},
-    whitePawn2: { rank: "B", file: "2", component: <Pawn pieceName = 'whitePawn2' setGrabbedPiece={setGrabbedPiece}/> }
+    whitePawn1: { rank: "A", file: "2", component: <Pawn pieceName='whitePawn1' setGrabbedPiece={setGrabbedPiece} /> },
+    whitePawn2: { rank: "B", file: "2", component: <Pawn pieceName='whitePawn2' setGrabbedPiece={setGrabbedPiece} /> },
+    whitePawn3: { rank: "C", file: "2", component: <Pawn pieceName='whitePawn3' setGrabbedPiece={setGrabbedPiece} /> },
+    whitePawn4: { rank: "D", file: "2", component: <Pawn pieceName='whitePawn4' setGrabbedPiece={setGrabbedPiece} /> },
+    whitePawn5: { rank: "E", file: "2", component: <Pawn pieceName='whitePawn5' setGrabbedPiece={setGrabbedPiece} /> },
+    whitePawn6: { rank: "F", file: "2", component: <Pawn pieceName='whitePawn6' setGrabbedPiece={setGrabbedPiece} /> },
+    whitePawn7: { rank: "G", file: "2", component: <Pawn pieceName='whitePawn7' setGrabbedPiece={setGrabbedPiece} /> },
+    whitePawn8: { rank: "H", file: "2", component: <Pawn pieceName='whitePawn8' setGrabbedPiece={setGrabbedPiece} /> },
   });
 
   useEffect(() => {
@@ -29,7 +35,7 @@ export default function Home() {
     if (!!id) {
       const rank = id.split("")[0];
       const file = id.split("")[1];
-      setPieceLocation(pieceLocation => ({...pieceLocation, [grabbedPiece]: {...pieceLocation[grabbedPiece], rank: rank, file: file }}));
+      setPieceLocation(pieceLocation => ({ ...pieceLocation, [grabbedPiece]: { ...pieceLocation[grabbedPiece], rank: rank, file: file } }));
     }
   }
 
@@ -45,7 +51,7 @@ export default function Home() {
       });
 
       let pieceComponent = null
-      if(typeof piece !== undefined && piece.length !== 0) {
+      if (typeof piece !== undefined && piece.length !== 0) {
         pieceComponent = pieceLocation[piece].component;
       }
       
