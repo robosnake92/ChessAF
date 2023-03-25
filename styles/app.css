@@ -35,8 +35,8 @@
   cursor: grab;
 }
 
-.grab {
-  cursor: grab;
+.grabbable {
+  cursor: grabbable;
 }
 
 .grab:active {
