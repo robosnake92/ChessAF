@@ -59,10 +59,12 @@ export default function Home() {
         className='square'
         onDragOver={handleDragOver}
         onDrop={handleDrop}
-        id={`${rank}${fileNumber}`}>{pieceComponent}</div>;
+        id={`${rank}${fileNumber}`}
+        key={`${rank}${fileNumber}`}
+      >{pieceComponent}</div>
     })
 
-    return <File file={fileNumber} pieceLocation={pieceLocation}>{squares}</File>;
+    return <File key={`file-${fileNumber}`} file={fileNumber} pieceLocation={pieceLocation}>{squares}</File>;
   })
 
   return (
