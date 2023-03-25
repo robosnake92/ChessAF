@@ -39,7 +39,7 @@
   cursor: grab;
 }
 
-.grabbing {
+.grab:active {
   cursor: grabbing;
 }
 
