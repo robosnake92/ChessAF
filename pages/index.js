@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import whitePawn from '../public/pieces/white-pawn.png';
+import whiteRook from '../public/pieces/white-rook.png';
 import { useEffect, useState } from 'react';
 
 export default function Home() {
@@ -14,15 +15,17 @@ export default function Home() {
     whitePawn6: { rank: "F", file: "2", component: <Pawn pieceName='whitePawn6' setGrabbedPiece={setGrabbedPiece} /> },
     whitePawn7: { rank: "G", file: "2", component: <Pawn pieceName='whitePawn7' setGrabbedPiece={setGrabbedPiece} /> },
     whitePawn8: { rank: "H", file: "2", component: <Pawn pieceName='whitePawn8' setGrabbedPiece={setGrabbedPiece} /> },
+    whiteRook1: { rank: "A", file: "1", component: <Rook pieceName='whiteRook1' setGrabbedPiece={setGrabbedPiece} /> },
+
   });
 
-  useEffect(() => {
-    console.log('pieceLocation updated: ', pieceLocation);
-  }, [pieceLocation])
+  // useEffect(() => {
+  //   console.log('pieceLocation updated: ', pieceLocation);
+  // }, [pieceLocation])
 
-  useEffect(() => {
-    console.log('grabbedPiece updated: ', grabbedPiece);
-  }, [grabbedPiece])
+  // useEffect(() => {
+  //   console.log('grabbedPiece updated: ', grabbedPiece);
+  // }, [grabbedPiece])
 
   const handleDragOver = (event) => {
     event.preventDefault()
@@ -106,6 +109,30 @@ function Pawn(props) {
       onDragEnd={handleDragEnd}
       onDragStart={handleDragStart}
       alt="white pawn"
+    />
+  )
+}
+
+function Rook(props) {
+  const pieceName = props.pieceName;
+  const setGrabbedPiece = props.setGrabbedPiece;
+
+  const handleDragEnd = (event) => {
+  }
+
+  const handleDragStart = (event) => {
+    event.dataTransfer.effectAllowed = "move";
+    setGrabbedPiece(pieceName);
+  }
+
+  return (
+    <Image
+      className={`piece grab`}
+      src={whiteRook}
+      draggable
+      onDragEnd={handleDragEnd}
+      onDragStart={handleDragStart}
+      alt="white rook"
     />
   )
 }
