@@ -6,29 +6,6 @@ import { useState } from 'react';
 export default function Home() {
   const [pieceLocation, setPieceLocation] = useState({rank: "A", file: "1"});
 
-  return (
-    <>
-      <main>
-        <div id='chess-board'>
-          <File file="8" pieceLocation={pieceLocation} setPieceLocation={setPieceLocation}><Pawn /></File>
-          <File file="7" pieceLocation={pieceLocation} setPieceLocation={setPieceLocation}><Pawn /></File>
-          <File file="6" pieceLocation={pieceLocation} setPieceLocation={setPieceLocation}><Pawn /></File>
-          <File file="5" pieceLocation={pieceLocation} setPieceLocation={setPieceLocation}><Pawn /></File>
-          <File file="4" pieceLocation={pieceLocation} setPieceLocation={setPieceLocation}><Pawn /></File>
-          <File file="3" pieceLocation={pieceLocation} setPieceLocation={setPieceLocation}><Pawn /></File>
-          <File file="2" pieceLocation={pieceLocation} setPieceLocation={setPieceLocation}><Pawn /></File>
-          <File file="1" pieceLocation={pieceLocation} setPieceLocation={setPieceLocation}><Pawn /></File>
-        </div>
-      </main>
-    </>
-  )
-}
-
-function File(props) {
-  const piece = props.children;
-  const pieceLocation = props.pieceLocation;
-  const setPieceLocation = props.setPieceLocation
-
   const handleDragOver = (event) => {
     event.preventDefault()
   }
@@ -44,16 +21,35 @@ function File(props) {
     }
   }
 
+  const possibleFiles = ["8", "7", "6", "5", "4", "3", "2", "1"];
+  const Files = possibleFiles.map(fileNumber => {
+    const possibleRanks = ["A", "B", "C", "D", "E", "F", "G", "H"];
+    const squares = possibleRanks.map(rank => {
+      return <div 
+        className='square' 
+        onDragOver={handleDragOver} 
+        onDrop={handleDrop} 
+        id={`${rank}${fileNumber}`}>{`${pieceLocation.rank}${pieceLocation.file}` === `${rank}${fileNumber}` && <Pawn />}</div>;
+    })
+
+    return <File file={fileNumber} pieceLocation={pieceLocation} setPieceLocation={setPieceLocation}>{squares}</File>;
+  })
+
+  return (
+    <>
+      <main>
+        <div id='chess-board'>
+          {Files}
+        </div>
+      </main>
+    </>
+  )
+}
+
+function File(props) {
   return (
     <div className='file'>
-      <div className='square' onDragOver={handleDragOver} onDrop={handleDrop} id={`A${props.file}`}>{`${pieceLocation.rank}${pieceLocation.file}` === `A${props.file}` && piece}</div>
-      <div className='square' onDragOver={handleDragOver} onDrop={handleDrop} id={`B${props.file}`}>{`${pieceLocation.rank}${pieceLocation.file}` === `B${props.file}` && piece}</div>
-      <div className='square' onDragOver={handleDragOver} onDrop={handleDrop} id={`C${props.file}`}>{`${pieceLocation.rank}${pieceLocation.file}` === `C${props.file}` && piece}</div>
-      <div className='square' onDragOver={handleDragOver} onDrop={handleDrop} id={`D${props.file}`}>{`${pieceLocation.rank}${pieceLocation.file}` === `D${props.file}` && piece}</div>
-      <div className='square' onDragOver={handleDragOver} onDrop={handleDrop} id={`E${props.file}`}>{`${pieceLocation.rank}${pieceLocation.file}` === `E${props.file}` && piece}</div>
-      <div className='square' onDragOver={handleDragOver} onDrop={handleDrop} id={`F${props.file}`}>{`${pieceLocation.rank}${pieceLocation.file}` === `F${props.file}` && piece}</div>
-      <div className='square' onDragOver={handleDragOver} onDrop={handleDrop} id={`G${props.file}`}>{`${pieceLocation.rank}${pieceLocation.file}` === `G${props.file}` && piece}</div>
-      <div className='square' onDragOver={handleDragOver} onDrop={handleDrop} id={`H${props.file}`}>{`${pieceLocation.rank}${pieceLocation.file}` === `H${props.file}` && piece}</div>
+      {props.children}
     </div>
   )
 }
