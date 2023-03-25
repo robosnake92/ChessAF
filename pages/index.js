@@ -1,23 +1,23 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import whiteKnight from '../public/pieces/wn.png'
-
-const inter = Inter({ subsets: ['latin'] })
+import whitePawn from '../public/pieces/white-pawn.png'
+import { useState } from 'react';
 
 export default function Home() {
+  const [pieceLocation, setPieceLocation] = useState({rank: "A", file: "1"});
+
   return (
     <>
       <main>
         <div id='chess-board'>
-          <File file="8"/>
-          <File file="7"/>
-          <File file="6"/>
-          <File file="5"/>
-          <File file="4"/>
-          <File file="3"/>
-          <File file="2"/>
-          <File file="1"/>
+          <File file="8" pieceLocation={`${pieceLocation.rank}${pieceLocation.file}`}><Pawn /></File>
+          <File file="7" pieceLocation={`${pieceLocation.rank}${pieceLocation.file}`}><Pawn /></File>
+          <File file="6" pieceLocation={`${pieceLocation.rank}${pieceLocation.file}`}><Pawn /></File>
+          <File file="5" pieceLocation={`${pieceLocation.rank}${pieceLocation.file}`}><Pawn /></File>
+          <File file="4" pieceLocation={`${pieceLocation.rank}${pieceLocation.file}`}><Pawn /></File>
+          <File file="3" pieceLocation={`${pieceLocation.rank}${pieceLocation.file}`}><Pawn /></File>
+          <File file="2" pieceLocation={`${pieceLocation.rank}${pieceLocation.file}`}><Pawn /></File>
+          <File file="1" pieceLocation={`${pieceLocation.rank}${pieceLocation.file}`}><Pawn /></File>
         </div>
       </main>
     </>
@@ -25,24 +25,30 @@ export default function Home() {
 }
 
 function File(props) {
+  const piece = props.children;
+  const pieceLocation = props.pieceLocation;
   return (
     <div className='file'>
-      <div className='square' id={`A${props.file}`}><Knight /></div>
-      <div className='square' id={`B${props.file}`}></div>
-      <div className='square' id={`C${props.file}`}></div>
-      <div className='square' id={`D${props.file}`}></div>
-      <div className='square' id={`E${props.file}`}></div>
-      <div className='square' id={`F${props.file}`}></div>
-      <div className='square' id={`G${props.file}`}></div>
-      <div className='square' id={`H${props.file}`}></div>
+      <div className='square' onDragOver={handleDragOver} onDrop={handleDrop} id={`A${props.file}`}>{pieceLocation === `A${props.file}` && piece}</div>
+      <div className='square' onDragOver={handleDragOver} onDrop={handleDrop} id={`B${props.file}`}>{pieceLocation === `B${props.file}` && piece}</div>
+      <div className='square' onDragOver={handleDragOver} onDrop={handleDrop} id={`C${props.file}`}>{pieceLocation === `C${props.file}` && piece}</div>
+      <div className='square' onDragOver={handleDragOver} onDrop={handleDrop} id={`D${props.file}`}>{pieceLocation === `D${props.file}` && piece}</div>
+      <div className='square' onDragOver={handleDragOver} onDrop={handleDrop} id={`E${props.file}`}>{pieceLocation === `E${props.file}` && piece}</div>
+      <div className='square' onDragOver={handleDragOver} onDrop={handleDrop} id={`F${props.file}`}>{pieceLocation === `F${props.file}` && piece}</div>
+      <div className='square' onDragOver={handleDragOver} onDrop={handleDrop} id={`G${props.file}`}>{pieceLocation === `G${props.file}` && piece}</div>
+      <div className='square' onDragOver={handleDragOver} onDrop={handleDrop} id={`H${props.file}`}>{pieceLocation === `H${props.file}` && piece}</div>
     </div>
   )
 }
 
-function Knight() {
-  console.log(whiteKnight);
+function Pawn() {
+  isGrabbed = false;
 
   return (
-    <Image src={whiteKnight}/>
+    <Image 
+      className={`piece${isGrabbed ? " grabbing" : " grab"}`}
+      src={whitePawn} 
+      draggable
+    />
   )
 }

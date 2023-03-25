@@ -1,14 +1,9 @@
+/* Board */
 #chess-board {
   width: 800px;
   height: 800px;
   display: flex;
   flex-wrap: wrap;
-}
-
-.square {
-  width: 100%;
-  height: 100%;
-
 }
 
 .file {
@@ -26,3 +21,25 @@
 .file:nth-child(odd) .square:nth-child(odd) {
   background-color: lightgreen;
 }
+
+.square {
+  width: 100%;
+  height: 100%;
+
+}
+
+/* Pieces */
+.piece {
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+}
+
+.grab {
+  cursor: grab;
+}
+
+.grabbing {
+  cursor: grabbing;
+}
+
