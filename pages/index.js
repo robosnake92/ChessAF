@@ -16,45 +16,45 @@ import { useEffect, useState } from 'react';
 
 export default function Home() {
   const [grabbedPiece, setGrabbedPiece] = useState(null);
-  const [pieceLocation, setPieceLocation] = useState({
-    whiteRook1: { rank: "A", file: "1", component: <Piece altText='white rook' image={whiteRook} pieceName='whiteRook1' setGrabbedPiece={setGrabbedPiece} /> },
-    whiteKnight1: { rank: "B", file: "1", component: <Piece altText='white rook' image={whiteKnight} pieceName='whiteKnight1' setGrabbedPiece={setGrabbedPiece} /> },
-    whiteBishop1: { rank: "C", file: "1", component: <Piece altText='white rook' image={whiteBishop} pieceName='whiteBishop1' setGrabbedPiece={setGrabbedPiece} /> },
-    whiteQueen1: { rank: "D", file: "1", component: <Piece altText='white rook' image={whiteQueen} pieceName='whiteQueen1' setGrabbedPiece={setGrabbedPiece} /> },
-    whiteKing1: { rank: "E", file: "1", component: <Piece altText='white rook' image={whiteKing} pieceName='whiteKing1' setGrabbedPiece={setGrabbedPiece} /> },
-    whiteBishop2: { rank: "F", file: "1", component: <Piece altText='white rook' image={whiteBishop} pieceName='whiteBishop2' setGrabbedPiece={setGrabbedPiece} /> },
-    whiteKnight2: { rank: "G", file: "1", component: <Piece altText='white rook' image={whiteKnight} pieceName='whiteKnight2' setGrabbedPiece={setGrabbedPiece} /> },
-    whiteRook2: { rank: "H", file: "1", component: <Piece altText='white rook' image={whiteRook} pieceName='whiteRook2' setGrabbedPiece={setGrabbedPiece} /> },
-    whitePawn1: { rank: "A", file: "2", component: <Piece altText='white pawn' image={whitePawn} pieceName='whitePawn1' setGrabbedPiece={setGrabbedPiece} /> },
-    whitePawn2: { rank: "B", file: "2", component: <Piece altText='white pawn' image={whitePawn} pieceName='whitePawn2' setGrabbedPiece={setGrabbedPiece} /> },
-    whitePawn3: { rank: "C", file: "2", component: <Piece altText='white pawn' image={whitePawn} pieceName='whitePawn3' setGrabbedPiece={setGrabbedPiece} /> },
-    whitePawn4: { rank: "D", file: "2", component: <Piece altText='white pawn' image={whitePawn} pieceName='whitePawn4' setGrabbedPiece={setGrabbedPiece} /> },
-    whitePawn5: { rank: "E", file: "2", component: <Piece altText='white pawn' image={whitePawn} pieceName='whitePawn5' setGrabbedPiece={setGrabbedPiece} /> },
-    whitePawn6: { rank: "F", file: "2", component: <Piece altText='white pawn' image={whitePawn} pieceName='whitePawn6' setGrabbedPiece={setGrabbedPiece} /> },
-    whitePawn7: { rank: "G", file: "2", component: <Piece altText='white pawn' image={whitePawn} pieceName='whitePawn7' setGrabbedPiece={setGrabbedPiece} /> },
-    whitePawn8: { rank: "H", file: "2", component: <Piece altText='white pawn' image={whitePawn} pieceName='whitePawn8' setGrabbedPiece={setGrabbedPiece} /> },
-    blackRook1: { rank: "A", file: "8", component: <Piece altText='black rook' image={blackRook} pieceName='blackRook1' setGrabbedPiece={setGrabbedPiece} /> },
-    blackKnight1: { rank: "B", file: "8", component: <Piece altText='black rook' image={blackKnight} pieceName='blackKnight1' setGrabbedPiece={setGrabbedPiece} /> },
-    blackBishop1: { rank: "C", file: "8", component: <Piece altText='black rook' image={blackBishop} pieceName='blackBishop1' setGrabbedPiece={setGrabbedPiece} /> },
-    blackQueen1: { rank: "D", file: "8", component: <Piece altText='black rook' image={blackQueen} pieceName='blackQueen1' setGrabbedPiece={setGrabbedPiece} /> },
-    blackKing1: { rank: "E", file: "8", component: <Piece altText='black rook' image={blackKing} pieceName='blackKing1' setGrabbedPiece={setGrabbedPiece} /> },
-    blackBishop2: { rank: "F", file: "8", component: <Piece altText='black rook' image={blackBishop} pieceName='blackBishop2' setGrabbedPiece={setGrabbedPiece} /> },
-    blackKnight2: { rank: "G", file: "8", component: <Piece altText='black rook' image={blackKnight} pieceName='blackKnight2' setGrabbedPiece={setGrabbedPiece} /> },
-    blackRook2: { rank: "H", file: "8", component: <Piece altText='black rook' image={blackRook} pieceName='blackRook2' setGrabbedPiece={setGrabbedPiece} /> },
-    blackPawn1: { rank: "A", file: "7", component: <Piece altText='black pawn' image={blackPawn} pieceName='blackPawn1' setGrabbedPiece={setGrabbedPiece} /> },
-    blackPawn2: { rank: "B", file: "7", component: <Piece altText='black pawn' image={blackPawn} pieceName='blackPawn2' setGrabbedPiece={setGrabbedPiece} /> },
-    blackPawn3: { rank: "C", file: "7", component: <Piece altText='black pawn' image={blackPawn} pieceName='blackPawn3' setGrabbedPiece={setGrabbedPiece} /> },
-    blackPawn4: { rank: "D", file: "7", component: <Piece altText='black pawn' image={blackPawn} pieceName='blackPawn4' setGrabbedPiece={setGrabbedPiece} /> },
-    blackPawn5: { rank: "E", file: "7", component: <Piece altText='black pawn' image={blackPawn} pieceName='blackPawn5' setGrabbedPiece={setGrabbedPiece} /> },
-    blackPawn6: { rank: "F", file: "7", component: <Piece altText='black pawn' image={blackPawn} pieceName='blackPawn6' setGrabbedPiece={setGrabbedPiece} /> },
-    blackPawn7: { rank: "G", file: "7", component: <Piece altText='black pawn' image={blackPawn} pieceName='blackPawn7' setGrabbedPiece={setGrabbedPiece} /> },
-    blackPawn8: { rank: "H", file: "7", component: <Piece altText='black pawn' image={blackPawn} pieceName='blackPawn8' setGrabbedPiece={setGrabbedPiece} /> }
+  const [pieceStates, setPieceStates] = useState({
+    whiteRook1: { inPlay: true, rank: "A", file: "1", component: <Piece altText='white rook' image={whiteRook} pieceName='whiteRook1' setGrabbedPiece={setGrabbedPiece} /> },
+    whiteKnight1: { inPlay: true, rank: "B", file: "1", component: <Piece altText='white rook' image={whiteKnight} pieceName='whiteKnight1' setGrabbedPiece={setGrabbedPiece} /> },
+    whiteBishop1: { inPlay: true, rank: "C", file: "1", component: <Piece altText='white rook' image={whiteBishop} pieceName='whiteBishop1' setGrabbedPiece={setGrabbedPiece} /> },
+    whiteQueen1: { inPlay: true, rank: "D", file: "1", component: <Piece altText='white rook' image={whiteQueen} pieceName='whiteQueen1' setGrabbedPiece={setGrabbedPiece} /> },
+    whiteKing1: { inPlay: true, rank: "E", file: "1", component: <Piece altText='white rook' image={whiteKing} pieceName='whiteKing1' setGrabbedPiece={setGrabbedPiece} /> },
+    whiteBishop2: { inPlay: true, rank: "F", file: "1", component: <Piece altText='white rook' image={whiteBishop} pieceName='whiteBishop2' setGrabbedPiece={setGrabbedPiece} /> },
+    whiteKnight2: { inPlay: true, rank: "G", file: "1", component: <Piece altText='white rook' image={whiteKnight} pieceName='whiteKnight2' setGrabbedPiece={setGrabbedPiece} /> },
+    whiteRook2: { inPlay: true, rank: "H", file: "1", component: <Piece altText='white rook' image={whiteRook} pieceName='whiteRook2' setGrabbedPiece={setGrabbedPiece} /> },
+    whitePawn1: { inPlay: true, rank: "A", file: "2", component: <Piece altText='white pawn' image={whitePawn} pieceName='whitePawn1' setGrabbedPiece={setGrabbedPiece} /> },
+    whitePawn2: { inPlay: true, rank: "B", file: "2", component: <Piece altText='white pawn' image={whitePawn} pieceName='whitePawn2' setGrabbedPiece={setGrabbedPiece} /> },
+    whitePawn3: { inPlay: true, rank: "C", file: "2", component: <Piece altText='white pawn' image={whitePawn} pieceName='whitePawn3' setGrabbedPiece={setGrabbedPiece} /> },
+    whitePawn4: { inPlay: true, rank: "D", file: "2", component: <Piece altText='white pawn' image={whitePawn} pieceName='whitePawn4' setGrabbedPiece={setGrabbedPiece} /> },
+    whitePawn5: { inPlay: true, rank: "E", file: "2", component: <Piece altText='white pawn' image={whitePawn} pieceName='whitePawn5' setGrabbedPiece={setGrabbedPiece} /> },
+    whitePawn6: { inPlay: true, rank: "F", file: "2", component: <Piece altText='white pawn' image={whitePawn} pieceName='whitePawn6' setGrabbedPiece={setGrabbedPiece} /> },
+    whitePawn7: { inPlay: true, rank: "G", file: "2", component: <Piece altText='white pawn' image={whitePawn} pieceName='whitePawn7' setGrabbedPiece={setGrabbedPiece} /> },
+    whitePawn8: { inPlay: true, rank: "H", file: "2", component: <Piece altText='white pawn' image={whitePawn} pieceName='whitePawn8' setGrabbedPiece={setGrabbedPiece} /> },
+    blackRook1: { inPlay: true, rank: "A", file: "8", component: <Piece altText='black rook' image={blackRook} pieceName='blackRook1' setGrabbedPiece={setGrabbedPiece} /> },
+    blackKnight1: { inPlay: true, rank: "B", file: "8", component: <Piece altText='black rook' image={blackKnight} pieceName='blackKnight1' setGrabbedPiece={setGrabbedPiece} /> },
+    blackBishop1: { inPlay: true, rank: "C", file: "8", component: <Piece altText='black rook' image={blackBishop} pieceName='blackBishop1' setGrabbedPiece={setGrabbedPiece} /> },
+    blackQueen1: { inPlay: true, rank: "D", file: "8", component: <Piece altText='black rook' image={blackQueen} pieceName='blackQueen1' setGrabbedPiece={setGrabbedPiece} /> },
+    blackKing1: { inPlay: true, rank: "E", file: "8", component: <Piece altText='black rook' image={blackKing} pieceName='blackKing1' setGrabbedPiece={setGrabbedPiece} /> },
+    blackBishop2: { inPlay: true, rank: "F", file: "8", component: <Piece altText='black rook' image={blackBishop} pieceName='blackBishop2' setGrabbedPiece={setGrabbedPiece} /> },
+    blackKnight2: { inPlay: true, rank: "G", file: "8", component: <Piece altText='black rook' image={blackKnight} pieceName='blackKnight2' setGrabbedPiece={setGrabbedPiece} /> },
+    blackRook2: { inPlay: true, rank: "H", file: "8", component: <Piece altText='black rook' image={blackRook} pieceName='blackRook2' setGrabbedPiece={setGrabbedPiece} /> },
+    blackPawn1: { inPlay: true, rank: "A", file: "7", component: <Piece altText='black pawn' image={blackPawn} pieceName='blackPawn1' setGrabbedPiece={setGrabbedPiece} /> },
+    blackPawn2: { inPlay: true, rank: "B", file: "7", component: <Piece altText='black pawn' image={blackPawn} pieceName='blackPawn2' setGrabbedPiece={setGrabbedPiece} /> },
+    blackPawn3: { inPlay: true, rank: "C", file: "7", component: <Piece altText='black pawn' image={blackPawn} pieceName='blackPawn3' setGrabbedPiece={setGrabbedPiece} /> },
+    blackPawn4: { inPlay: true, rank: "D", file: "7", component: <Piece altText='black pawn' image={blackPawn} pieceName='blackPawn4' setGrabbedPiece={setGrabbedPiece} /> },
+    blackPawn5: { inPlay: true, rank: "E", file: "7", component: <Piece altText='black pawn' image={blackPawn} pieceName='blackPawn5' setGrabbedPiece={setGrabbedPiece} /> },
+    blackPawn6: { inPlay: true, rank: "F", file: "7", component: <Piece altText='black pawn' image={blackPawn} pieceName='blackPawn6' setGrabbedPiece={setGrabbedPiece} /> },
+    blackPawn7: { inPlay: true, rank: "G", file: "7", component: <Piece altText='black pawn' image={blackPawn} pieceName='blackPawn7' setGrabbedPiece={setGrabbedPiece} /> },
+    blackPawn8: { inPlay: true, rank: "H", file: "7", component: <Piece altText='black pawn' image={blackPawn} pieceName='blackPawn8' setGrabbedPiece={setGrabbedPiece} /> }
 
   });
 
   // useEffect(() => {
-  //   console.log('pieceLocation updated: ', pieceLocation);
-  // }, [pieceLocation])
+  //   console.log('pieceStates updated: ', pieceStates);
+  // }, [pieceStates])
 
   // useEffect(() => {
   //   console.log('grabbedPiece updated: ', grabbedPiece);
@@ -69,9 +69,23 @@ export default function Home() {
     const id = event.target.id;
 
     if (!!id) {
-      const rank = id.split("")[0];
-      const file = id.split("")[1];
-      setPieceLocation(pieceLocation => ({ ...pieceLocation, [grabbedPiece]: { ...pieceLocation[grabbedPiece], rank: rank, file: file } }));
+      if (Object.keys(pieceStates).includes(event.target.id)) {
+        // Get target rank & file
+        const rank = pieceStates[id].rank;
+        const file = pieceStates[id].file;
+
+        // Set captured piece to captured
+        setPieceStates(pieceStates => ({ ...pieceStates, [id]: { ...pieceStates[id], inPlay: false } }));
+
+        // Update moved piece
+        setPieceStates(pieceStates => ({ ...pieceStates, [grabbedPiece]: { ...pieceStates[grabbedPiece], rank: rank, file: file } }));
+
+      } else {
+        const rank = id.split("")[0];
+        const file = id.split("")[1];
+        setPieceStates(pieceStates => ({ ...pieceStates, [grabbedPiece]: { ...pieceStates[grabbedPiece], rank: rank, file: file } }));
+      }
+
     }
   }
 
@@ -81,14 +95,17 @@ export default function Home() {
     const squares = possibleRanks.map(rank => {
       // Check each possible piece
       // TODO: once we find the piece, we don't have to filter anymore. Maybe check if there's a function that stops once the object is found?
-      const piece = Object.keys(pieceLocation).filter(pieceKey => {
-        const pieceState = pieceLocation[pieceKey];
-        return `${pieceState.rank}${pieceState.file}` === `${rank}${fileNumber}`;
+      const piece = Object.keys(pieceStates).filter(pieceKey => {
+        const pieceState = pieceStates[pieceKey];
+        return (
+          `${pieceState.rank}${pieceState.file}` === `${rank}${fileNumber}`
+          && pieceState.inPlay === true
+        );
       });
 
       let pieceComponent = null
       if (typeof piece !== undefined && piece.length !== 0) {
-        pieceComponent = pieceLocation[piece].component;
+        pieceComponent = pieceStates[piece].component;
       }
 
       return <div
@@ -100,7 +117,7 @@ export default function Home() {
       >{pieceComponent}</div>
     })
 
-    return <File key={`file-${fileNumber}`} file={fileNumber} pieceLocation={pieceLocation}>{squares}</File>;
+    return <File key={`file-${fileNumber}`} file={fileNumber} pieceStates={pieceStates}>{squares}</File>;
   })
 
   return (
@@ -125,6 +142,7 @@ function File(props) {
 function Piece(props) {
   const pieceName = props.pieceName;
   const setGrabbedPiece = props.setGrabbedPiece;
+  const altText = props.altText;
 
   const handleDragEnd = (event) => {
   }
@@ -141,7 +159,8 @@ function Piece(props) {
       draggable
       onDragEnd={handleDragEnd}
       onDragStart={handleDragStart}
-      alt={props.altText}
+      alt={altText}
+      id={pieceName}
     />
   )
 }
