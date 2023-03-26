@@ -16,6 +16,7 @@ import { useEffect, useState } from 'react';
 
 export default function Home() {
   const [grabbedPiece, setGrabbedPiece] = useState(null);
+  const [hoveredSquare, setHoveredSquare] = useState(null);
   const [pieceStates, setPieceStates] = useState({
     whiteRook1: { inPlay: true, rank: "A", file: "1", component: <Piece altText='white rook' image={whiteRook} pieceName='whiteRook1' setGrabbedPiece={setGrabbedPiece} /> },
     whiteKnight1: { inPlay: true, rank: "B", file: "1", component: <Piece altText='white rook' image={whiteKnight} pieceName='whiteKnight1' setGrabbedPiece={setGrabbedPiece} /> },
@@ -62,6 +63,7 @@ export default function Home() {
 
   const handleDragOver = (event) => {
     event.preventDefault()
+    setHoveredSquare(event.target.id);
   }
 
   const handleDrop = (event) => {
@@ -108,15 +110,15 @@ export default function Home() {
         pieceComponent = pieceStates[piece].component;
       }
 
-      return <div
-        className='square'
-        onDragOver={handleDragOver}
-        onDrop={handleDrop}
+      return <Square
+        hovered={`${rank}${fileNumber}`===hoveredSquare}
+        handleDragOver={handleDragOver}
+        handleDrop={handleDrop}
         id={`${rank}${fileNumber}`}
         key={`${rank}${fileNumber}`}
-      >{pieceComponent}</div>
+      >{pieceComponent}</Square>
     })
-
+    console.log(squares);
     return <File key={`file-${fileNumber}`} file={fileNumber} pieceStates={pieceStates}>{squares}</File>;
   })
 
@@ -162,5 +164,21 @@ function Piece(props) {
       alt={altText}
       id={pieceName}
     />
+  )
+}
+
+function Square(props) {
+  const hovered = props.hovered;
+  const handleDragOver = props.handleDragOver;
+  const handleDrop = props.handleDrop;
+  const id = props.id;
+
+  return (
+    <div
+      className={`square${hovered ? ' hovered' : ''}`}
+      id={id}
+      onDragOver={handleDragOver}
+      onDrop={handleDrop}
+    >{props.children}</div>
   )
 }

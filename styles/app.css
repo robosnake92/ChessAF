@@ -23,7 +23,7 @@
 }
 
 .square {
-  width: 100%;
+  width: 100px;
   height: 100%;
 
 }
@@ -43,3 +43,9 @@
   cursor: grabbing;
 }
 
+/* Effects */
+.hovered {
+  z-index:1;
+  border: aliceblue solid 3px;
+  box-sizing: border-box;
+}
